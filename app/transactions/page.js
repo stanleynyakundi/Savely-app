@@ -27,21 +27,21 @@ export default function TransactionsPage() {
         <h1 className="text-3xl font-bold text-white-900 mb-8">
           Transaction History
         </h1>
-        <div className="bg-white shadow overflow-hidden sm:rounded-md">
+        <div className="bg-gray-900 shadow overflow-hidden sm:rounded-md">
           {loading ? (
-            <p className="p-6 text-gray-500">Loading...</p>
+            <p className="p-6 text-gray-400">Loading...</p>
           ) : transactions.length === 0 ? (
-            <p className="p-6 text-gray-500">No transactions yet.</p>
+            <p className="p-6 text-gray-400">No transactions yet.</p>
           ) : (
             <ul className="divide-y divide-gray-200">
               {transactions.map((tx) => (
                 <li key={tx.id} className="px-6 py-4">
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="text-sm font-medium text-gray-900">
+                      <p className="text-sm font-medium text-gray-400">
                         {tx.type === "deposit" ? "Deposit" : "Withdrawal"}
                       </p>
-                      <p className="text-sm text-gray-500">
+                      <p className="text-sm text-gray-400">
                         {new Date(tx.created_at).toLocaleString()}
                       </p>
                     </div>
@@ -57,7 +57,7 @@ export default function TransactionsPage() {
                       >
                         {tx.status}
                       </span>
-                      <span className="ml-4 text-sm font-medium text-gray-900">
+                      <span className="ml-4 text-sm font-medium text-gray-400">
                         KES {tx.amount}
                       </span>
                     </div>

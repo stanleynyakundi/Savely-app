@@ -36,7 +36,7 @@ export default function LoginPage() {
           <div>
             <label
               htmlFor="email"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-gray-400"
             >
               Email
             </label>
@@ -52,7 +52,7 @@ export default function LoginPage() {
           <div>
             <label
               htmlFor="password"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-gray-400"
             >
               Password
             </label>
@@ -67,7 +67,7 @@ export default function LoginPage() {
           </div>
           <button
             type="submit"
-            className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-gray-400 bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
             Sign in
           </button>
@@ -75,7 +75,7 @@ export default function LoginPage() {
             Do not have an account?{" "}
             <Link
               href="/register"
-              className="text-indigo-600 hover:text-indigo-500"
+              className="text-blue-400 hover:text-indigo-500"
             >
               Register
             </Link>

@@ -13,22 +13,22 @@ export default function ProfilePage() {
         <h1 className="text-3xl font-bold text-white-900 mb-8">Profile</h1>
         <div className="bg-white shadow rounded-lg p-6 space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-medium text-gray-400">
               Username
             </label>
-            <p className="mt-1 text-sm text-gray-900">{session?.user?.name}</p>
+            <p className="mt-1 text-sm text-gray-400">{session?.user?.name}</p>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-medium text-gray-400">
               Email
             </label>
-            <p className="mt-1 text-sm text-gray-900">{session?.user?.email}</p>
+            <p className="mt-1 text-sm text-gray-400">{session?.user?.email}</p>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-medium text-gray-400">
               Phone
             </label>
-            <p className="mt-1 text-sm text-gray-900">{session?.user?.phone}</p>
+            <p className="mt-1 text-sm text-gray-400">{session?.user?.phone}</p>
           </div>
         </div>
       </div>
