@@ -10,25 +10,25 @@ export default function ProfilePage() {
     <div>
       <Navbar />
       <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-8">Profile</h1>
-        <div className="bg-white shadow rounded-lg p-6 space-y-4">
+        <h1 className="text-3xl font-bold text-gray-400 mb-8">Profile</h1>
+        <div className="bg-gray-900 shadow rounded-lg p-6 space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-medium text-gray-400">
               Username
             </label>
-            <p className="mt-1 text-sm text-gray-900">{session?.user?.name}</p>
+            <p className="mt-1 text-sm text-gray-400">{session?.user?.name}</p>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-medium text-gray-400">
               Email
             </label>
-            <p className="mt-1 text-sm text-gray-900">{session?.user?.email}</p>
+            <p className="mt-1 text-sm text-gray-400">{session?.user?.email}</p>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-medium text-gray-400">
               Phone
             </label>
-            <p className="mt-1 text-sm text-gray-900">{session?.user?.phone}</p>
+            <p className="mt-1 text-sm text-gray-400">{session?.user?.phone}</p>
           </div>
         </div>
       </div>
