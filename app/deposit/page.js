@@ -26,7 +26,7 @@ export default function DepositPage() {
 
     const data = await res.json();
     if (res.ok) {
-      router.push("/dashboard?deposit=success");
+      router.push(`/payment-status/${data.transactionId}`);
     } else {
       setError(data.error || "Deposit failed");
       setLoading(false);

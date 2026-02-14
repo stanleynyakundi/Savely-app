@@ -79,7 +79,7 @@ export async function POST(request) {
             ),
             inserted_tx AS (
                 INSERT INTO transactions (user_id, type, amount, status)
-                SELECT user_id, 'unlock_mature', amount, 'completed'
+                SELECT user_id, 'unlock_mature', amount, 'success'
                 FROM updated_saving
                 RETURNING id
             )

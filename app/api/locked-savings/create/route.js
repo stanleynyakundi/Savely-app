@@ -63,7 +63,7 @@ export async function POST(request) {
             ),
             inserted_tx AS (
                 INSERT INTO transactions (user_id, type, amount, status)
-                SELECT ${userId}, 'lock_created', ${amount}, 'completed'
+                SELECT ${userId}, 'lock_created', ${amount}, 'success'
                 WHERE EXISTS (SELECT 1 FROM deducted_balance)
                 RETURNING id
             )

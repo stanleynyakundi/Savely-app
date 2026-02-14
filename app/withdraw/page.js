@@ -61,7 +61,7 @@ export default function WithdrawPage() {
 
     const data = await res.json();
     if (res.ok) {
-      router.push("/dashboard?withdraw=success");
+      router.push(`/payment-status/${data.transactionId}`);
     } else {
       setError(data.error || "Withdrawal failed");
       setLoading(false);
