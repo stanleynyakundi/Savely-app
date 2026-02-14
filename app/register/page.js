@@ -30,7 +30,9 @@ export default function RegisterPage() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
       <div className="max-w-md w-full space-y-8 p-8 bg-white rounded shadow">
-        <h2 className="text-2xl font-bold text-center">Create an Account</h2>
+        <h2 className="text-2xl font-bold text-gray-700 text-center">
+          Create an Account
+        </h2>
         {error && <p className="text-red-500 text-sm">{error}</p>}
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <div>
@@ -94,7 +96,7 @@ export default function RegisterPage() {
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-gray-700"
             />
           </div>
           <button
