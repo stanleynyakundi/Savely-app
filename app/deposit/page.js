@@ -37,7 +37,9 @@ export default function DepositPage() {
     <div>
       <Navbar />
       <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <h1 className="text-3xl font-bold text-gray-400-900 mb-8">Deposit Money</h1>
+        <h1 className="text-3xl font-bold text-white-900 mb-8">
+          Deposit Money
+        </h1>
         <form
           onSubmit={handleSubmit}
           className="bg-gray-900 shadow rounded-lg p-6 space-y-6"
@@ -57,7 +59,7 @@ export default function DepositPage() {
               required
               value={amount}
               onChange={(e) => setAmount(e.target.value)}
-              className="mt-1 text-gray-700 block w-full px-3 py-2 border border-gray-700 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-gray-700"
             />
           </div>
           <div>
@@ -73,7 +75,7 @@ export default function DepositPage() {
               required
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
-              className="mt-1 text-gray-700 block w-full px-3 py-2 border border-gray-700 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-gray-700"
             />
           </div>
           {error && <p className="text-red-500 text-sm">{error}</p>}
