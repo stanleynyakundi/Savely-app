@@ -14,7 +14,7 @@ export default function ProfilePage() {
         <div className="bg-white shadow rounded-lg p-6 space-y-4">
           <div>
             <label className="block text-sm font-medium text-gray-700">
-              Name
+              Username
             </label>
             <p className="mt-1 text-sm text-gray-900">{session?.user?.name}</p>
           </div>
