@@ -71,7 +71,7 @@ export async function POST(request) {
             ),
             inserted_transaction AS (
                 INSERT INTO transactions (user_id, type, amount, status)
-                SELECT user_id, 'unlock_early', ${amountToReturn}, 'completed'
+                SELECT user_id, 'unlock_early', ${amountToReturn}, 'success'
                 FROM updated_saving
                 RETURNING id
             )
