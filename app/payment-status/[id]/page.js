@@ -1,12 +1,13 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useParams } from "next/navigation";
 import Navbar from "@/components/Navbar";
 
-export default function PaymentStatusPage({ params }) {
+export default function PaymentStatusPage() {
     const router = useRouter();
-    const { id } = params;
+    const params = useParams();
+    const id = params?.id;
     const [status, setStatus] = useState("pending");
     const [error, setError] = useState("");
 
