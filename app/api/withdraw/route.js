@@ -93,6 +93,7 @@ export async function POST(request) {
       phone,
       amount,
       networkCode,
+      `WITHDRAW-${transactionId}`,
     );
 
     if (!payheroResponse.success) {

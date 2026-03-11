@@ -45,28 +45,37 @@ export async function POST(request) {
         }
 
         // Extract transaction details from callback
-        // New PayHero format includes: transaction_date, provider, success, merchant,
-        // payment_reference, third_party_reference, status, reference, CheckoutRequestID, provider_reference
+        // Support v2 nested payload and fallback to flattened properties
+        const isV2Format = callbackData.response !== undefined;
+        const pData = isV2Format ? callbackData.response : callbackData;
+        const successFlag = isV2Format ? callbackData.status : callbackData.success;
+
         const {
             reference,
             transaction_id,
             status,
-            success,
+            Status,
+            Amount,
             amount,
+            Phone,
             phone_number,
+            ResultCode,
             result_code,
+            ResultDesc,
             result_desc,
-            transaction_date,
-            provider,
-            merchant,
-            payment_reference,
-            third_party_reference,
             CheckoutRequestID,
+            ExternalReference,
+            external_reference,
+            provider,
             provider_reference,
-        } = callbackData;
+            third_party_reference,
+            transaction_date
+        } = pData;
 
         // Validate required fields - reference is the primary identifier
-        payheroRef = reference || transaction_id;
+        // Check CheckoutRequestID first since STK push stores that as the primary reference
+        payheroRef = CheckoutRequestID || ExternalReference || external_reference || reference || transaction_id;
+
         if (!payheroRef) {
             console.error("❌ No PayHero reference found in callback");
             return NextResponse.json(
@@ -78,20 +87,25 @@ export async function POST(request) {
         // Determine if transaction was successful
         // Check both the 'success' boolean field and status string
         const isSuccess =
-            success === true ||
+            successFlag === true ||
+            ResultCode === 0 ||
+            ResultCode === "0" ||
             result_code === 0 ||
             result_code === "0" ||
             status === "SUCCESS" ||
-            status === "success";
+            status === "success" ||
+            Status === "SUCCESS" ||
+            Status === "Success";
+
         const transactionStatus = isSuccess ? "success" : "failed";
 
         console.log("🔍 Processing transaction:", {
             reference: payheroRef,
             status: transactionStatus,
-            successFlag: success,
-            statusField: status,
-            resultCode: result_code,
-            resultDesc: result_desc,
+            successFlag: successFlag,
+            statusField: status || Status,
+            resultCode: ResultCode || result_code,
+            resultDesc: ResultDesc || result_desc,
             provider: provider,
             thirdPartyRef: third_party_reference || provider_reference,
             transactionDate: transaction_date,
@@ -154,9 +168,12 @@ export async function POST(request) {
                             WHERE id = ${transaction.id}
                             RETURNING user_id, amount
                         )
-                        UPDATE balances
-                        SET amount = amount + (SELECT amount FROM tx_update), updated_at = CURRENT_TIMESTAMP
-                        WHERE user_id = (SELECT user_id FROM tx_update)
+                        INSERT INTO balances (user_id, amount, updated_at)
+                        SELECT user_id, amount, CURRENT_TIMESTAMP FROM tx_update
+                        ON CONFLICT (user_id) 
+                        DO UPDATE SET 
+                            amount = balances.amount + EXCLUDED.amount, 
+                            updated_at = CURRENT_TIMESTAMP
                     `;
                     console.log(
                         `✅ Deposit successful: Added ${transaction.amount} to user ${transaction.user_id}`
@@ -188,12 +205,12 @@ export async function POST(request) {
                     SET 
                         status = 'failed',
                         callback_data = ${JSON.stringify(callbackData)},
-                        result_desc = ${result_desc || "Unknown error"},
+                        result_desc = ${ResultDesc || result_desc || "Unknown error"},
                         updated_at = CURRENT_TIMESTAMP
                     WHERE id = ${transaction.id}
                 `;
                 console.log(
-                    `❌ Transaction failed: ${result_desc || "Unknown error"}`
+                    `❌ Transaction failed: ${ResultDesc || result_desc || "Unknown error"}`
                 );
             }
 
